@@ -122,7 +122,27 @@ Ext.define('Ext.ux.ImageViewer', {
                 };
             }
         } else {
-            me.config.imageSrc = src;
+            me.setImageSrc(src);
+        }
+    },
+    
+    unloadImage: function() {  
+    	var me = this;
+
+        // mask image viewer
+        if (me.getLoadingMask()) {
+            me.setMasked({
+                xtype: 'loadmask',
+                message:me.getLoadingMessage()
+            });
+        }
+
+        if (me.imgEl) {
+            me.imgEl.dom.src = '';
+            me.imgEl.setStyle({ visibility: 'hidden' });
+        } else {
+            me.setImageSrc('');
+            me.imgEl.setStyle({ visibility: 'hidden' });
         }
     },
 
