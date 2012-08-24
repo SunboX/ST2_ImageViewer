@@ -1,2 +1,2 @@
-ST2_ImageViewer_Carousel
+Ext.ux.ImageViewer
 ========================
