@@ -127,8 +127,8 @@ Ext.define('Ext.ux.ImageViewer', {
     },
     
     unloadImage: function() {  
-    	var me = this;
-
+        var me = this;
+    
         // mask image viewer
         if (me.getLoadingMask()) {
             me.setMasked({
@@ -136,7 +136,7 @@ Ext.define('Ext.ux.ImageViewer', {
                 message:me.getLoadingMessage()
             });
         }
-
+    
         if (me.imgEl) {
             me.imgEl.dom.src = '';
             me.imgEl.setStyle({ visibility: 'hidden' });
@@ -171,9 +171,14 @@ Ext.define('Ext.ux.ImageViewer', {
             me.scale = me.baseScale = 1;
         }
 
+        // calc initial translation
+        var tmpTranslateX = (me.viewportWidth - me.baseScale * me.imgWidth) / 2,
+            tmpTranslateY = (me.viewportHeight - me.baseScale * me.imgHeight) / 2;
+        
         // set initial translation to center
-        me.translateX = me.translateBaseX = (me.viewportWidth - me.baseScale * me.imgWidth) / 2;
-        me.translateY = me.translateBaseY = (me.viewportHeight - me.baseScale * me.imgHeight) / 2;
+        me.setTranslation(tmpTranslateX, tmpTranslateY);
+        me.translateBaseX = me.translateX;
+        me.translateBaseY = me.translateY;
 
         // apply initial scale and translation
         me.applyTransform();
