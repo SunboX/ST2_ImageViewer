@@ -513,8 +513,8 @@ Ext.define('Ext.ux.ImageViewer', {
         }
 
         // size container to final image size
-        var boundWidth = Math.max(me.imgWidth * scale, me.viewportWidth);
-        var boundHeight = Math.max(me.imgHeight * scale, me.viewportHeight);
+        var boundWidth = Math.max(me.imgWidth * scale + 2 * me.translateX, me.viewportWidth);
+        var boundHeight = Math.max(me.imgHeight * scale + 2 * me.translateY, me.viewportHeight);
 
         me.figEl.setStyle({
             width : boundWidth + 'px',
