@@ -31,7 +31,8 @@ Ext.define('Ext.ux.ImageViewer', {
         scrollable    : 'both',
         loadingMessage: 'Loading ...',
         html          : '<figure><img></figure>',
-        errorImage    : false
+        errorImage    : false,
+        hideOnMaskTap : false
     },
     
     duringDestroy: false,
@@ -104,6 +105,14 @@ Ext.define('Ext.ux.ImageViewer', {
             pinch : me.onImagePinch,
             pinchend : me.onImagePinchEnd
         });
+
+        // attach event listeners on brackgroud ,it's like maskLayout
+        if (me.getHideOnMaskTap()) {
+            me.figEl.addListener({
+                scope : me,
+                singletap: me.onMaskTap
+            })
+        };
 
         // load image
         if (me.getImageSrc()) {
@@ -408,6 +417,11 @@ Ext.define('Ext.ux.ImageViewer', {
                 Ext.repaint();
             }, 50);
         }
+    },
+
+    onMaskTap:function () {
+        var me = this;
+        me.hide();
     },
 
     setOrigin: function(x, y) {
